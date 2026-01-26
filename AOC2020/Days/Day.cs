@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace AOC2020.Days;
+
+internal abstract class Day(string[] puzzleInput)
+{
+        private readonly string[]  _PuzzleInput = puzzleInput;
+        public string[] PuzzleInput { get { return _PuzzleInput; }}
+       
+        private string? Part1 { get; set; }
+        public string? Part2 { get; set; }
+        private DailySolutions Solutions { get; set; } = new DailySolutions();
+        public abstract (string Part1, string Part2) Solve();
+
+    public void AddSolution(int part, string solution)
+    {
+        if (part < 1 || part > 2)
+        {
+            throw new ArgumentOutOfRangeException(nameof(part));
+        }
+
+        switch (part)
+        {
+            case 1: this.Solutions.Part1 = solution; break;
+            case 2: this.Solutions.Part2 = solution; break;
+        }
+    }
+
+    public (string Part1, string Part2) GetSolutions() {
+
+        if (Solutions == null)
+        {
+            throw new InvalidOperationException("Solutions not set");
+        }
+        else {
+            return (Part1: Solutions.Part1, Part2: Solutions.Part2);
+        }
+
+           
+    }
+}
+
+   
+
