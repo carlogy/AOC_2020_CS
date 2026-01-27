@@ -7,7 +7,7 @@ using System.Text;
 
 namespace AOC2020.Days.Day_1;
 
-    internal class Day1(string[] puzzleInput) : Day(puzzleInput)
+    public class Day1(string[] puzzleInput) : Day(puzzleInput)
     {
         
         public override (string Part1, string Part2) Solve() {
