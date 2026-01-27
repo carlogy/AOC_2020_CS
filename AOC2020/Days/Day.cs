@@ -4,13 +4,10 @@ using System.Text;
 
 namespace AOC2020.Days;
 
-internal abstract class Day(string[] puzzleInput)
+public abstract class Day(string[] puzzleInput)
 {
         private readonly string[]  _PuzzleInput = puzzleInput;
         public string[] PuzzleInput { get { return _PuzzleInput; }}
-       
-        private string? Part1 { get; set; }
-        public string? Part2 { get; set; }
         private DailySolutions Solutions { get; set; } = new DailySolutions();
         public abstract (string Part1, string Part2) Solve();
 
