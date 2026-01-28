@@ -2,50 +2,74 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Runtime.CompilerServices;
-
 using System.Text;
+using Xunit.Runner.Common;
 
 namespace AOC2020.Days.Day_1;
 
-    public class Day1(string[] puzzleInput) : Day(puzzleInput)
+public class Day1(string[] puzzleInput) : Day(puzzleInput)
+{
+
+    public override (string Part1, string Part2) Solve()
     {
-        
-        public override (string Part1, string Part2) Solve() {
-            var solution1 = FixExpenseReport1();
-            this.AddSolution(1, Convert.ToString(solution1));
-            var solutions = GetSolutions();
-            return solutions;
-        }
-
-        private int FixExpenseReport1() {
-
-            var complements = GetComplements();
-            return complements.Item1 * complements.Item2;
-        }
-
-        private Tuple<int, int> GetComplements() {
-
-            var sumsHash = new Dictionary<int, int>();
-            int summand1;
-            int summand2;
-
-            for (var i = 0; i < this.PuzzleInput.Length; i++)
-                {
-                    var num = Convert.ToInt32(this.PuzzleInput[i]);
-                    var complement = 2020 - num;
-
-                    if (!sumsHash.ContainsKey(complement))
-                    {
-                        sumsHash.Add(num, i);
-                        continue;
-                    }
-
-                    summand1 = num;
-                    summand2 = complement;
-                    return Tuple.Create(summand1, summand2);
-            }
-
-            return Tuple.Create(0, 0);
-        } 
+        var solution1 = FixExpenseReport1(2020);
+        this.AddSolution(1, Convert.ToString(solution1));
+        var solution2 = FixExpenseReport2(2020);
+        this.AddSolution(2, Convert.ToString(solution2));
+        return GetSolutions();
     }
 
+    private int FixExpenseReport1(int target)
+    {
+        var complements = GetComplements1(2020);
+        return complements.Item1 * complements.Item2;
+    }
+    private int FixExpenseReport2(int target) {
+        var complements = GetComplements2(target);
+        return complements.Item1 * complements.Item2 * complements.Item3; 
+    }
+
+    private (int, int) GetComplements1(int target)
+    {
+        var sumsHash = new Dictionary<int, int>();
+        for (var i = 0; i < this.PuzzleInput.Length; i++)
+        {
+            var num = Convert.ToInt32(this.PuzzleInput[i]);
+            var complement = target - num;
+
+            if (!sumsHash.ContainsKey(complement))
+            {
+                sumsHash.Add(num, i);
+                continue;
+            }
+            return (num, complement);
+        }
+        return (0,0);
+    }
+
+    private (int, int, int) GetComplements2(int target)
+    {
+        var sortedArr = SortandConvertPuzzleInput();   
+        for (var i = 0; i < sortedArr.Length - 1; i++) {
+            var complement = target - sortedArr[i];
+            var result = GetComplements1(complement);
+            if (result == (0,0)) {
+                continue;
+            }
+            return (sortedArr[i], result.Item1, result.Item2);
+        }
+        return (0, 0, 0);
+    }
+
+    private int[] SortandConvertPuzzleInput()
+    {
+
+        var sortedArr = new int[this.PuzzleInput.Length];
+        for (var i = 0; i < this.PuzzleInput.Length; i++)
+        {
+            var num = Convert.ToInt32(this.PuzzleInput[i]);
+            sortedArr[i] = num;
+        }
+        return sortedArr;
+    }
+}
