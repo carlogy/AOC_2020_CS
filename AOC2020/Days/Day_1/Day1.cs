@@ -5,11 +5,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using Xunit.Runner.Common;
 
-namespace AOC2020.Days.Day_1;
+namespace AOC2020.Days;
 
 public class Day1(string[] puzzleInput) : Day(puzzleInput)
 {
-
     public override (string Part1, string Part2) Solve()
     {
         var solution1 = FixExpenseReport1(2020);
@@ -21,7 +20,7 @@ public class Day1(string[] puzzleInput) : Day(puzzleInput)
 
     private int FixExpenseReport1(int target)
     {
-        var complements = GetComplements1(2020);
+        var complements = GetComplements1(target);
         return complements.Item1 * complements.Item2;
     }
     private int FixExpenseReport2(int target) {

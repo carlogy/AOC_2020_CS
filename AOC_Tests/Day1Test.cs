@@ -1,5 +1,5 @@
 ﻿
-using AOC2020.Days.Day_1;
+using AOC2020.Days;
 
 namespace AOC_Tests
 {
