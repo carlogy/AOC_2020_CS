@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-
-namespace AOC2020.Days;
+﻿namespace AOC2020.Days;
 
 public abstract class Day(string[] puzzleInput) : IPuzzleDay
 {

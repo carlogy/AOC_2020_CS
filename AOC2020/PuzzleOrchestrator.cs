@@ -1,7 +1,4 @@
 ﻿using AOC2020.Days;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AOC2020;
 
@@ -12,8 +9,8 @@ namespace AOC2020;
             Console.WriteLine("AOC 2020");
             Console.WriteLine("What day do you want to solve?");
             var day = Convert.ToInt32(Console.ReadLine());
-
-            if (day > 26 || day < 1) {
+        if (day > 26 || day < 1)
+        {
                 Console.WriteLine($"You selected {day}, only days 1-25 have puzzles to solve. Please try again.");
             }
             return day;
@@ -40,12 +37,11 @@ namespace AOC2020;
             {
                 throw new ArgumentOutOfRangeException($"The day provided ({day}) is not a puzzle day");
             }
-
             switch (day) 
             {
                 case 1: return new Day1(puzzleinput);
+                case 2: return new Day2(puzzleinput);
                 default: throw new NotImplementedException("Day not solved yet try again!"); 
-            
             }
         }
     }

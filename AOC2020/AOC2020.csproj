@@ -7,5 +7,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="xunit.v3" Version="3.2.2" />
-  </ItemGroup> 
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="AOC_Tests"/>
+  </ItemGroup>
 </Project>
