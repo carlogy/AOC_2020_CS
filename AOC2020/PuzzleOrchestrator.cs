@@ -9,13 +9,13 @@ namespace AOC2020;
             Console.WriteLine("AOC 2020");
             Console.WriteLine("What day do you want to solve?");
             var day = Convert.ToInt32(Console.ReadLine());
-        if (day > 26 || day < 1)
-        {
+            if (day > 25 || day < 1)
+            {
                 Console.WriteLine($"You selected {day}, only days 1-25 have puzzles to solve. Please try again.");
             }
             return day;
         }
-
+        
         public static string[] GetPuzzleInput(int day) {
             Console.WriteLine("Getting puzzle input...");
             var puzzleInput = PuzzleInputReader.GetInput(day);
@@ -41,6 +41,7 @@ namespace AOC2020;
             {
                 case 1: return new Day1(puzzleinput);
                 case 2: return new Day2(puzzleinput);
+                case 3: return new Day3(puzzleinput); 
                 default: throw new NotImplementedException("Day not solved yet try again!"); 
             }
         }

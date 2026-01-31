@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Dynamic;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
-using Xunit.Sdk;
-
-namespace AOC2020.Days;
+﻿namespace AOC2020.Days;
 
 public class Day2(string[] puzzleInput) : Day(puzzleInput)
 {
@@ -24,12 +16,39 @@ public class Day2(string[] puzzleInput) : Day(puzzleInput)
         foreach (var line in this.PuzzleInput)
         {
             var items = this.GetPolicyAndPassword(line);
-            var passwordCheckPassed = ValidatePassword(items.Min, items.Max, items.letter, items.Password, part);
+            var passwordCheckPassed = ValidatePassword(items.Min, items.Max, items.Letter, items.Password, part);
             if (passwordCheckPassed) { total++; }
         }
         return total;
     }
-    private (int Min, int Max, string letter, string Password) GetPolicyAndPassword(string line)
+
+    private (int Min, int Max, string Letter, string Password) GetPolicyAndPassword(string line) {
+
+        int min = 0;
+        int max = 0;
+        string letter = "";
+        string password = "";
+        var temp = 0;
+
+        for (var i = 0; i < line.Length; i++)
+        {
+            if (line[i] == '-')
+            {
+                min = Convert.ToInt32(line.Substring(0, i));
+                temp = i;
+                continue;
+            }
+            if (char.IsWhiteSpace(line[i]) && max == 0)
+            {
+                letter = line[i + 1].ToString();
+                max = Convert.ToInt32(line.Substring(temp + 1, i - temp));
+                password = line.Substring(i + 4);
+                break;
+            }
+        }
+        return (min, max, letter, password);
+    }
+    private (int Min, int Max, string Letter, string Password) OriginalGetPolicyAndPassword(string line)
     {
 
         var items = SplitIntoPolicyAndPassword(line);
@@ -48,7 +67,6 @@ public class Day2(string[] puzzleInput) : Day(puzzleInput)
 
     private (int Min, int Max) GetCounts(string policy)
     {
-
         var counts = policy.Trim().Split("-");
         var min = Convert.ToInt32(counts[0]);
         var max = Convert.ToInt32(counts[1]);
@@ -76,5 +94,5 @@ public class Day2(string[] puzzleInput) : Day(puzzleInput)
             default:
                 throw new NotImplementedException("There are only two puzzle parts to solve.");
         }
-    }    
+    }
 }
