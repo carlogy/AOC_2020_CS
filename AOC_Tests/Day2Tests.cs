@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
-using AOC2020.Days;
-using AOC2020;
+﻿using AOC2020;
 
 namespace AOC_Tests;
 
